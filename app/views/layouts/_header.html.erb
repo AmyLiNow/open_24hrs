@@ -1,0 +1,23 @@
+ <!--header for the site’s (plain-text) logo and navigation-->
+    <!--header default classes for bootstrap creates navbar width, fixed top navbar, with dark color(navbar inverse) instead of light-->
+    <header class="navbar navbar-fixed-top navbar-inverse"> 
+    
+      <!--container for nav to be inside and centered-->
+      <div class="container">
+        
+        <!--main page link for logo-->
+        <%= link_to "Open24hrs", '#', id: "logo" %>
+        
+        <!--site navigation-->
+        <nav>
+          
+          <!--nav menu padding/margin, nav menu bar width, to the right-->
+          <ul class="nav navbar-nav pull-right">
+            <li><%= link_to "Home", "/" %></li>
+            <li><%= link_to "About",   '#' %></li>
+
+          </ul>
+        </nav>
+        
+      </div>
+    </header>

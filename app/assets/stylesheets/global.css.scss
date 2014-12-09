@@ -1,0 +1,26 @@
+body {
+    padding-top: 60px;
+}
+
+
+
+.center {
+    text-align: center;
+}
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: crimson;
+//   text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+
+  &:hover, &:focus {
+    color: #fff;
+    background-color: transparent;
+    text-decoration: none;
+  }
+}
