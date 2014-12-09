@@ -7,8 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <!--header for the site’s (plain-text) logo and navigation-->
+    <!--header default classes for bootstrap creates navbar width, fixed top navbar, with dark color(navbar inverse) instead of light-->
+    <%= render 'layouts/header' %>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>
