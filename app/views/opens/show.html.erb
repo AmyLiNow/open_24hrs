@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Yelp:</strong>
+  <%= @open.yelp %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @open.name %>
+</p>
+
+<p>
+  <strong>Street:</strong>
+  <%= @open.street %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @open.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @open.state %>
+</p>
+
+<p>
+  <strong>Zip:</strong>
+  <%= @open.zip %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @open.phone %>
+</p>
+
+<p>
+  <strong>Neighborhood:</strong>
+  <%= @open.neighborhood %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @open.website %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @open.category %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @open.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @open.longitude %>
+</p>
+
+<%= link_to 'Edit', edit_open_path(@open) %> |
+<%= link_to 'Back', opens_path %>

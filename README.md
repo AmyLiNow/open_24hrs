@@ -46,6 +46,4 @@ branches
     $ git merge [branch name]
 
 ******Database*********
-https://preview.c9.io/amylinow/rails-projects/
-    
-
+https://docs.google.com/document/d/1rNXVtnSOYSww3IqAVdocGxGkfp9RhPrKGAvrqxJOd1U/edit
