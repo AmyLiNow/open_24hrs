@@ -23,6 +23,7 @@ class HomeController < ApplicationController
       arr.push(link) #5
       arr.push(phone) #6
       arr.push(neighborhood) #7
+      arr.push(yelp) #8
       @opensArr.push(arr) 
 
     end

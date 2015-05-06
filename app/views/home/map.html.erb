@@ -1,52 +1,9 @@
 <div class="container-fluid">
     <!--<section class="center jumbotron">-->
         <!--<h1>Welcome to Open 24hrs</h1>-->
-    </section>    
-    <div id="map" style="width:100%; height: 300px;"></div>
-   	<section>
-
-		<h1>Open 24/7 business list</h1>
-		
-		<table>
-		  <thead>
-		    <tr>
-		      <th>Yelp</th>
-		      <th>Name</th>
-		      <th>Street</th>
-		      <th>City</th>
-		      <th>State</th>
-		      <th>Zip</th>
-		      <th>Phone</th>
-		      <th>Neighborhood</th>
-		      <th>Website</th>
-		      <th>Category</th>
-		      <th colspan="3"></th>
-		    </tr>
-		  </thead>
-		
-		  <tbody>
-		    <% @opens.each do |open| %>
-		      <tr>
-		        <td><%= open.yelp %></td>
-		        <td><%= open.name %></td>
-		        <td><%= open.street %></td>
-		        <td><%= open.city %></td>
-		        <td><%= open.state %></td>
-		        <td><%= open.zip %></td>
-		        <td><%= open.phone %></td>
-		        <td><%= open.neighborhood %></td>
-		        <td><%= open.website %></td>
-		        <td><%= open.category %></td>
-		      </tr>
-		    <% end %>
-		  </tbody>
-		</table>
-		
-		<br>
-		
-		<%= link_to 'New Open', new_open_path %>
-
-   	</section>
+    <!-- </section>  -->   
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <div id="map" ></div>
     
     <!-- google map api -->
 	<%= javascript_tag do %>
@@ -54,7 +11,7 @@
 		//get info from open model
 		window.opensURL = "<%=j opens_url %>";
 		
-		//get get the array of venues for the loaded events
+		//get get the array of venues for the loaded opensArr
 		window.opensArr = <%=raw @opensArr.to_json %>;
 		
 		var styleArray = [
@@ -83,27 +40,64 @@
 		
 		var map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 13,
-			center: new google.maps.LatLng(37.7745140408613, -122.44537353515625),
+			center: new google.maps.LatLng(37.785, -122.44537353515625),
+			disableDefaultUI: true,
+			mapTypeControl: true,
+		    mapTypeControlOptions: {
+		        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+		        position: google.maps.ControlPosition.BOTTOM_CENTER
+		    },
+		    zoomControl: true,
+		    zoomControlOptions: {
+		        style: google.maps.ZoomControlStyle.LARGE,
+		        position: google.maps.ControlPosition.LEFT_CENTER
+		    },
+		    scaleControl: true,
+		    streetViewControl: true,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			styles: styleArray
 		});
 		
 		var infowindow = new google.maps.InfoWindow();
 		var marker, i;
+		var link;
+		
 
-		for (i = 0; i < events.length; i++) {  
-			
+		function hasLink(i) {
+			if(opensArr[i][5] != ""){
+				link = "<p>Website: <a href=\""+opensArr[i][5]+"\" target=\"blank\">"+opensArr[i][5]+"</a></p>";
+				return link;
+			}
+			else{
+				return " ";
+			}
+		}
+
+		for (i = 0; i < opensArr.length; i++) {  
+			//var markerIcon;
+			//var currentCat = opensArr[i][3];
+			//if( currentCat == "diner"){
+			//	markerIcon = 'http://placekitten.com/g/50/50';
+			//	console.log("diner");
+			//}else{
+			//	markerIcon = 'http://placekitten.com/g/47/47';
+			//}
+
 			marker = new google.maps.Marker({
-				position: new google.maps.LatLng(events[i][0], events[i][1]),
-				map: map
+				position: new google.maps.LatLng(opensArr[i][0], opensArr[i][1]),
+				map: map//,
+			//	icon: markerIcon
 			});
 
 			google.maps.event.addListener(marker, 'click', (function(marker, i) {
 
 				return function() {
 				infowindow.setContent(
-				"<span id='content'>" + "<p ><strong><a href=\"events/" + events[i][7] + "\">" + events[i][2] + "</a></strong></p>" + "<p>Location: " + events[i][3] + " " + events[i][4] + " "+ events[i][5] + "</p>" + "<p>Description: "+ events[i][6] + "</p>" +"</span>"
-				);
+				"<h3>"+opensArr[i][2]+"</h3>"+
+				"<h5>"+"Category: "+opensArr[i][3]+"</h5>"+ hasLink(i)+
+				"<h5>"+"Number: "+opensArr[i][6]+"</h5>"+
+				"<h5>"+"Neighborhood: "+opensArr[i][7]+"</h5>"+
+				"<p><strong><a href=\""+opensArr[i][8]+"\" target=\"blank\">" +"Yelp"+ "</strong></a></p>");
 				infowindow.open(map, marker);
 				}
 			})(marker, i));
